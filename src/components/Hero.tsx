@@ -1,23 +1,6 @@
-import { useEffect, useState } from 'react'
 import { ArrowRight, ChevronRight, Crown, Building } from 'lucide-react'
-import Logo from './Logo'
 
 export default function Hero() {
-  const [scale, setScale] = useState(1)
-
-  useEffect(() => {
-    const handleScroll = () => {
-      // Get scroll position
-      const scrollPosition = window.scrollY
-      // Calculate scale based on scroll (1 at top, 0.3 at 500px scroll)
-      const newScale = Math.max(0.3, 1 - (scrollPosition / 500))
-      setScale(newScale)
-    }
-
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
-
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId)
     if (element) {
@@ -30,16 +13,6 @@ export default function Hero() {
 
   return (
     <section className="relative min-h-screen flex items-center bg-gray-900 overflow-hidden">
-      {/* Background Logo with dynamic scaling */}
-      <div 
-        className="fixed inset-0 flex items-center justify-center opacity-[0.03] pointer-events-none transition-transform duration-300"
-        style={{
-          transform: `scale(${scale}) rotate(-12deg)`,
-        }}
-      >
-        <Logo className="w-[150vh] h-[150vh]" />
-      </div>
-
       {/* Gradient Orbs */}
       <div className="absolute top-40 -left-4 w-96 h-96 bg-primary/30 rounded-full filter blur-[128px]" />
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-500/20 rounded-full filter blur-[128px]" />
